@@ -15,7 +15,7 @@ const ActionByKeyComponent = ({ keys, onPressKey }: ActionByKeyContainerProps): 
     };
 
     const isKeyCode = (event: KeyboardEvent): void => {
-        if (onPressKey && onPressKey.isExecuting) {
+        if (onPressKey && !onPressKey.isExecuting) {
             keyArray.map(key => event.keyCode === Number(key) && doPressKey());
         }
     };
