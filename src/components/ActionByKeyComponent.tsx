@@ -1,23 +1,22 @@
-import { createElement, useEffect, Fragment } from "react";
+import { createElement, useEffect, Fragment, ReactElement } from "react";
 import { ActionByKeyContainerProps } from "../../typings/ActionByKeyProps";
 
 interface ActionByKeyComponentProps {
     doPressKey: () => void;
 }
 
-const ActionByKeyComponent = ({ keys, doPressKey }: ActionByKeyContainerProps & ActionByKeyComponentProps) => {
-    const keyArray = keys ? keys.value ? keys.value.split(' ') : [] : [];
+const ActionByKeyComponent = ({
+    keys,
+    doPressKey
+}: ActionByKeyContainerProps & ActionByKeyComponentProps): ReactElement => {
+    const keyArray = keys ? (keys.value ? keys.value.split(" ") : []) : [];
 
-    useEffect(() => {
+    useEffect((): void => {
         document.addEventListener("keydown", isKeyCode, false);
     }, []);
 
-    const isKeyCode = (event: KeyboardEvent) => {
-        keyArray.map((key) => {
-            if (event.keyCode === parseInt(key)) {
-                doPressKey();
-            }
-        });
+    const isKeyCode = (event: KeyboardEvent): void => {
+        keyArray.map(key => event.keyCode === Number(key) && doPressKey());
     };
 
     return <Fragment />;
