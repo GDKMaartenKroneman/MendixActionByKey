@@ -6,13 +6,7 @@ import "./ui/ActionByKey.css";
 import ActionByKeyComponent from "./components/ActionByKeyComponent";
 
 const ActionByKey = (props: ActionByKeyContainerProps): ReactElement => {
-    const doPressKey = (): void => {
-        if (props.onPressKey && props.onPressKey.canExecute) {
-            props.onPressKey.execute();
-        }
-    };
-
-    return <ActionByKeyComponent doPressKey={(): void => doPressKey()} {...props} />;
+    return <ActionByKeyComponent {...props} />;
 };
 
 export default hot(ActionByKey);
