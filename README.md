@@ -2,6 +2,10 @@
 Start an action by pressing a key
 
 ## Features
+1.4
+- Send along Parameters from your context in a Microflow or Nanoflow
+
+1.3
 - Fire any action by pressing a key
 - The keys can be entered in the widget settings
 - Use any number of keys for an action
@@ -17,9 +21,3 @@ Start an action by pressing a key
 
 ## Issues, suggestions and feature requests
 No issues, suggestions or feature requests so far. If you wish to apply one, please go to https://github.com/jvink/MendixActionByKey/issues and create an issue.
-
-
-## Limitations:
-- When using a Microflow or Nanoflow, you can not use parameters, because of the limitations of the current Mendix API. This feature is planned though:
-
-![image](https://user-images.githubusercontent.com/27773080/67846951-52d97480-fb02-11e9-81a7-423555f616e8.png)
