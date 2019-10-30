@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="mendix.actionbykey.ActionByKey" pluginWidget="true" needsEntityContext="true" offlineCapable="true" supportedPlatform="Web" 
+    xmlns="http://www.mendix.com/widget/1.0/" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
+    <name>ActionByKeys</name>
+    <description>Start an action by pressing key(s)</description>
+    <icon>iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAAAo0lEQVRIie2TwQ2DMAxFX9mCA1LFNMA6sBsjdAxEWKI3eoHKEri1E3LjS77EyX+WY8Oti9QBC7D+iQVoYwAW8z2CfPgwAlZnQV/fwvnQLQugyllABYzY+7+HKuu0SBMXwDMtUQDNbMoJmIE6F2ACnie513ZWpgCkuaYhF6AEeuCdApD9P8tF7YHnky8DaGMaBfAsmhbh4CrUbhdSzJtfgFsHfQC8S9gZ5uhpbwAAAABJRU5ErkJggg==</icon>
+    <properties>
+        <propertyGroup caption="General">
+            <property key="keys" type="textTemplate" required="false">
+                <caption>Keys</caption>
+                <description>Enter all keys you would want to use an action on. Separate using spaces. Example: 77 69 78 68 73 88. Find keys at https://keycode.info/.</description>
+            </property>
+            <property key="onPressKey" type="action" required="false">
+                <caption>On Press Key</caption>
+                <description>Determine what happens when you press any of the keys</description>
+            </property>
+        </propertyGroup>
+    </properties>
+</widget>
