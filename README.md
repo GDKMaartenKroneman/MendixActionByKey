@@ -1,11 +1,11 @@
 ## ActionByKey
-Start an action by pressing a key
+Using this widget, you can start an Action, like "Show a page" or "Call a Microflow", by pressing a key on your keyboard.
+
+# Why should I use it?
+This widget will greatly increase the speed of your business case. Imagine a form where an employee fills in data, and has to click on the Confirm button with a mouse click. It would be way quicker when just pressing a key like "Enter" to Save changes and close the page.
 
 ## Features
-1.4
 - Send along Parameters from your context in a Microflow or Nanoflow
-
-1.3
 - Fire any action by pressing a key
 - The keys can be entered in the widget settings
 - Use any number of keys for an action
