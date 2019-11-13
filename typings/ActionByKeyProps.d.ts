@@ -17,14 +17,26 @@ interface CommonProps {
 export interface ActionByKeyContainerProps extends CommonProps {
     keys?: DynamicValue<string>;
     onPressKey?: ActionValue;
+    focusNextField: boolean;
+    focusField?: DynamicValue<string>;
+    onlyRunField?: DynamicValue<string>;
+    focusFieldLast: boolean;
 }
 
 export interface ActionByKeyPreviewProps extends CommonProps {
     keys?: string;
     onPressKey?: ActionPreview;
+    focusNextField: boolean;
+    focusField?: string;
+    onlyRunField?: string;
+    focusFieldLast: boolean;
 }
 
 export interface VisibilityMap {
     keys: boolean;
     onPressKey: boolean;
+    focusNextField: boolean;
+    focusField: boolean;
+    onlyRunField: boolean;
+    focusFieldLast: boolean;
 }

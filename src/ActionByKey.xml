@@ -13,8 +13,30 @@
             </property>
             <property key="onPressKey" type="action" required="false">
                 <caption>On Press Key</caption>
-                <description>Determine what happens when you press any of the keys</description>
+                <description>Determine what happens when you press any of the keys.</description>
             </property>
+        </propertyGroup>
+        <propertyGroup caption="Focus">
+            <propertyGroup caption="Next">
+                <property key="focusNextField" type="boolean" defaultValue="false">
+                    <caption>Focus next field</caption>
+                    <description>Determine wether to focus the next input on key press. NOTE: You can not use 'Next' and 'Specific' at the same time, if enabled, 'Next' will overwrite 'Specific' functionality.</description>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Specific">
+                <property key="focusField" type="textTemplate" required="false">
+                    <caption>Focus field</caption>
+                    <description>Determine what field by name will be focused on key press. (Optional)</description>
+                </property>
+                <property key="onlyRunField" type="textTemplate" required="false">
+                    <caption>Only run focus from field</caption>
+                    <description>Determine on what field by name the focus function will work on. Leave empty if it should always work on the page the widget is active on. (Optional)</description>
+                </property>
+                <property key="focusFieldLast" type="boolean" defaultValue="true">
+                    <caption>Focus last field found</caption>
+                    <description>There might be more field with the name you supplied. Determine wether to focus the last found element or the first. Default: last element.</description>
+                </property>
+            </propertyGroup>
         </propertyGroup>
     </properties>
 </widget>
