@@ -22,6 +22,10 @@
                     <caption>Focus next field</caption>
                     <description>Determine wether to focus the next input on key press. NOTE: You can not use 'Next' and 'Specific' at the same time, if enabled, 'Next' will overwrite 'Specific' functionality.</description>
                 </property>
+                <property key="onNoNext" type="action" required="false">
+                    <caption>On No Next field</caption>
+                    <description>If you enabled 'Focus next field', determine what happens when you pressed any of the keys when you already reached the last input.</description>
+                </property>
             </propertyGroup>
             <propertyGroup caption="Specific">
                 <property key="focusField" type="textTemplate" required="false">

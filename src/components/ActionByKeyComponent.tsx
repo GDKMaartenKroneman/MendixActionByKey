@@ -7,13 +7,18 @@ const ActionByKeyComponent = ({
     focusFieldLast,
     focusNextField,
     onlyRunField,
+    onNoNext,
     onPressKey
 }: ActionByKeyContainerProps): ReactElement => {
     const keyArray = keys ? (keys.value ? keys.value.split(" ") : []) : [];
 
-    useEffect((): void => {
+    useEffect(() => {
         document.addEventListener("keydown", isKeyCode, false);
-    }, [onPressKey && onPressKey.canExecute]);
+
+        return () => {
+            document.removeEventListener("keydown", isKeyCode, false);
+        };
+    }, [onPressKey && onPressKey.canExecute, onNoNext && onNoNext.canExecute]);
 
     const doPressKey = (event: KeyboardEvent): void => {
         if (onPressKey && onPressKey.canExecute && !onPressKey.isExecuting) {
@@ -21,21 +26,26 @@ const ActionByKeyComponent = ({
         }
 
         if (focusNextField) {
-            let triggerElement = document.activeElement as HTMLInputElement;
+            const triggerElement = document.activeElement as HTMLInputElement;
             const wrappers = document.getElementsByTagName("input");
+            const arr = [].slice.call(wrappers);
 
-            for (let index = 0; index < wrappers.length; index++) {
-                const element = wrappers[index];
-
+            arr.forEach((element, index) => {
                 if (triggerElement === element) {
                     const nextElement = wrappers[index + 1];
 
                     if (nextElement) {
-                        nextElement.focus();
                         event.preventDefault();
+                        nextElement.focus();
+                    } else {
+                        event.preventDefault();
+
+                        if (onNoNext && onNoNext.canExecute && !onNoNext.isExecuting) {
+                            onNoNext.execute();
+                        }
                     }
                 }
-            }
+            });
         } else {
             if (focusField && focusField.value) {
                 const wrappers = document.getElementsByClassName(`${focusField && focusField.value}`);
@@ -45,9 +55,13 @@ const ActionByKeyComponent = ({
                 const input = div && (div.firstChild as HTMLInputElement);
 
                 if (onlyRunField && onlyRunField.value && input) {
-                    let triggerElement = document.activeElement as HTMLInputElement;
+                    const triggerElement = document.activeElement as HTMLInputElement;
 
-                    if (triggerElement.parentElement && triggerElement.parentElement.parentElement && triggerElement.parentElement.parentElement.classList.contains(onlyRunField.value)) {
+                    if (
+                        triggerElement.parentElement &&
+                        triggerElement.parentElement.parentElement &&
+                        triggerElement.parentElement.parentElement.classList.contains(onlyRunField.value)
+                    ) {
                         input.focus();
                         event.preventDefault();
                     }
