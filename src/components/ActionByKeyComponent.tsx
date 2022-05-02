@@ -21,53 +21,63 @@ const ActionByKeyComponent = ({
     }, [onPressKey && onPressKey.canExecute, onNoNext && onNoNext.canExecute]);
 
     const doPressKey = (event: KeyboardEvent): void => {
+
         if (onPressKey && onPressKey.canExecute && !onPressKey.isExecuting) {
-            onPressKey.execute();
-        }
 
-        if (focusNextField) {
-            const triggerElement = document.activeElement as HTMLInputElement;
-            const wrappers = document.getElementsByTagName("input");
-            const arr = [].slice.call(wrappers);
+            if (focusNextField) {
+                const triggerElement = document.activeElement as HTMLInputElement;
+                const wrappers = document.getElementsByTagName("input");
+                const arr = [].slice.call(wrappers);
+                
+                onPressKey.execute();
+                
+                arr.forEach((element, index) => {
+                    if (triggerElement === element) {
+                        const nextElement = wrappers[index + 1];
 
-            arr.forEach((element, index) => {
-                if (triggerElement === element) {
-                    const nextElement = wrappers[index + 1];
+                        if (nextElement) {
+                            event.preventDefault();
+                            nextElement.focus();
+                        } else {
+                            event.preventDefault();
 
-                    if (nextElement) {
-                        event.preventDefault();
-                        nextElement.focus();
-                    } else {
-                        event.preventDefault();
-
-                        if (onNoNext && onNoNext.canExecute && !onNoNext.isExecuting) {
-                            onNoNext.execute();
+                            if (onNoNext && onNoNext.canExecute && !onNoNext.isExecuting) {
+                                onNoNext.execute();
+                            }
                         }
                     }
-                }
-            });
-        } else {
-            if (focusField && focusField.value) {
-                const wrappers = document.getElementsByClassName(`${focusField && focusField.value}`);
-                const wrapperLength = wrappers.length;
-                const wrapper = wrappers[focusFieldLast ? wrapperLength - 1 : 0];
-                const div = wrapper && wrapper.lastChild;
-                const input = div && (div.firstChild as HTMLInputElement);
-
-                if (onlyRunField && onlyRunField.value && input) {
+                });
+            } 
+            else {
+                if (onlyRunField && onlyRunField.value) {
                     const triggerElement = document.activeElement as HTMLInputElement;
 
-                    if (
+                    if (triggerElement &&
+                        triggerElement.classList.contains(onlyRunField.value) ||
                         triggerElement.parentElement &&
-                        triggerElement.parentElement.parentElement &&
-                        triggerElement.parentElement.parentElement.classList.contains(onlyRunField.value)
+                        ((triggerElement.parentElement.classList.contains(onlyRunField.value)) ||
+                            (triggerElement.parentElement.parentElement &&
+                            triggerElement.parentElement.parentElement.classList.contains(onlyRunField.value)))
                     ) {
-                        input.focus();
+                        onPressKey.execute();
                         event.preventDefault();
                     }
-                } else if (onlyRunField && !onlyRunField.value && input) {
-                    input.focus();
+                }
+                else {
+                    onPressKey.execute();
                     event.preventDefault();
+                }
+
+                if (focusField && focusField.value) {
+                    const wrappers = document.getElementsByClassName(`${focusField && focusField.value}`);
+                    const wrapperLength = wrappers.length;
+                    const wrapper = wrappers[focusFieldLast ? wrapperLength - 1 : 0];
+                    const div = wrapper && wrapper.lastChild;
+                    const input = div && (div.firstChild as HTMLInputElement);
+                    
+                    if (input) {
+                        input.focus();
+                    }
                 }
             }
         }
